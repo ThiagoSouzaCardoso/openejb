@@ -44,8 +44,10 @@ public class Application {
 		
 		object.addMovie(new Movie("Zing","Zing no pais do pombo",2017));
 		
-		String titulo = WebClient.create("http://localhost:4204").path("/openejbmicroservice/ejb/db/movie/0").get(String.class);
-		System.out.println(titulo);
+		String movieTitleRS = WebClient.create("http://localhost:4204").path("/openejbmicroservice/ejb/db/movie/0").get(String.class);
+		System.out.println(movieTitleRS);
+		String movieTitleEJB = object.getMovieTitle("0");
+		System.out.println(movieTitleEJB);
 		
 	}
 	
