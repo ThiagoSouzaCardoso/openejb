@@ -1,5 +1,6 @@
 package br.com.fiap;
 
+import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Properties;
@@ -8,6 +9,8 @@ import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 
 import org.apache.cxf.jaxrs.client.WebClient;
+
+import junit.framework.Assert;
 
 public class Application {
 
@@ -45,8 +48,11 @@ public class Application {
 		object.addMovie(new Movie("Zing","Zing no pais do pombo",2017));
 		
 		String movieTitleRS = WebClient.create("http://localhost:4204").path("/openejbmicroservice/ejb/db/movie/0").get(String.class);
-		System.out.println(movieTitleRS);
 		String movieTitleEJB = object.getMovieTitle("0");
+
+		assertEquals(movieTitleEJB, movieTitleRS);
+		
+		System.out.println(movieTitleRS);
 		System.out.println(movieTitleEJB);
 		
 	}
